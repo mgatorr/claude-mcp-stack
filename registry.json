@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "servers": [
+    {
+      "id": "twelvedata",
+      "description": "Real-time and historical market data (US stocks, forex, crypto) via Twelve Data.",
+      "category": "finance",
+      "runtime": "uvx",
+      "package": "mcp-server-twelve-data",
+      "version_pin": "latest",
+      "args_template": ["mcp-server-twelve-data@latest", "-k", "${TWELVEDATA_API_KEY}", "-n", "5"],
+      "secrets": [
+        {
+          "name": "TWELVEDATA_API_KEY",
+          "description": "Twelve Data API key (free tier covers US/forex/crypto; Europe needs a paid plan).",
+          "where_to_get": "https://twelvedata.com/account/api-keys",
+          "required": true
+        }
+      ],
+      "config_snippet": {
+        "command": "uvx",
+        "args": ["mcp-server-twelve-data@latest", "-k", "${TWELVEDATA_API_KEY}", "-n", "5"]
+      },
+      "healthcheck": "spawn-eof",
+      "notes": "The Cowork connector bridge caps tools/list payload size; -n 5 keeps it under the limit."
+    },
+    {
+      "id": "yahoo-finance",
+      "description": "Free worldwide market data via Yahoo Finance, including European exchanges (.DE, .PA, .MC, .MI, .AS, .L). Maintained fork with an illiquid-symbol crash fix.",
+      "category": "finance",
+      "runtime": "local",
+      "package": "https://github.com/mgatorr/mcp-yahoo-finance",
+      "version_pin": "v0.1.3-mcpstack.1",
+      "args_template": [],
+      "secrets": [],
+      "config_snippet": {
+        "command": "PATH_TO_MCP_YAHOO_FINANCE/.venv/bin/mcp-yahoo-finance"
+      },
+      "healthcheck": "spawn-eof",
+      "notes": "Clone the pinned tag, run 'uv venv' + 'uv pip install -e .', then set command to the absolute path of '.venv/bin/mcp-yahoo-finance' (Windows: '.venv\\Scripts\\mcp-yahoo-finance.exe'). No API key required."
+    },
+    {
+      "id": "sec-edgar",
+      "description": "US SEC EDGAR filings and financial statements.",
+      "category": "finance",
+      "runtime": "uvx",
+      "package": "sec-edgar-mcp",
+      "version_pin": "latest",
+      "args_template": ["sec-edgar-mcp"],
+      "secrets": [
+        {
+          "name": "SEC_EDGAR_USER_AGENT",
+          "description": "Identifying string 'Name email' that SEC requires on every request. Whatever you put here is sent with each request (semi-public); use a real contact.",
+          "where_to_get": "https://www.sec.gov/os/webmaster-faq#developers",
+          "required": true
+        }
+      ],
+      "config_snippet": {
+        "command": "uvx",
+        "args": ["sec-edgar-mcp"],
+        "env": { "SEC_EDGAR_USER_AGENT": "${SEC_EDGAR_USER_AGENT}" }
+      },
+      "healthcheck": "spawn-eof",
+      "notes": ""
+    },
+    {
+      "id": "coingecko",
+      "description": "Crypto market data, prices, and metadata via CoinGecko.",
+      "category": "crypto",
+      "runtime": "npx",
+      "package": "@coingecko/coingecko-mcp",
+      "version_pin": "latest",
+      "args_template": ["-y", "@coingecko/coingecko-mcp@latest"],
+      "secrets": [],
+      "config_snippet": {
+        "command": "npx",
+        "args": ["-y", "@coingecko/coingecko-mcp@latest"]
+      },
+      "healthcheck": "spawn-eof",
+      "notes": "Free public CoinGecko API; no key required for basic usage."
+    },
+    {
+      "id": "fetch",
+      "description": "Fetch a URL and return its content as Markdown for the model to read.",
+      "category": "web",
+      "runtime": "uvx",
+      "package": "mcp-server-fetch",
+      "version_pin": "latest",
+      "args_template": ["mcp-server-fetch"],
+      "secrets": [],
+      "config_snippet": {
+        "command": "uvx",
+        "args": ["mcp-server-fetch"]
+      },
+      "healthcheck": "spawn-eof",
+      "notes": ""
+    },
+    {
+      "id": "youtube-transcript",
+      "description": "Retrieve transcripts/captions for YouTube videos.",
+      "category": "media",
+      "runtime": "npx",
+      "package": "@sinco-lab/mcp-youtube-transcript",
+      "version_pin": "latest",
+      "args_template": ["-y", "@sinco-lab/mcp-youtube-transcript"],
+      "secrets": [],
+      "config_snippet": {
+        "command": "npx",
+        "args": ["-y", "@sinco-lab/mcp-youtube-transcript"]
+      },
+      "healthcheck": "spawn-eof",
+      "notes": ""
+    }
+  ]
+}

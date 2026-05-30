@@ -1,0 +1,26 @@
+# Secrets & real client configs — NEVER commit
+claude_desktop_config*.json
+*.mcp.local.json
+*.local.json
+*.bak
+*.bak.*
+.env
+.env.*
+
+# ...but DO track the placeholder-only example templates
+!*.example.json
+
+# Python
+__pycache__/
+*.py[oc]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

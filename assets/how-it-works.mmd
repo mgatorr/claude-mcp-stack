@@ -1,0 +1,9 @@
+flowchart TD
+    U[User pastes the repo URL to a Claude Code agent] --> A[Agent reads AGENTS.md]
+    A --> R[Agent reads registry.json catalog]
+    R --> D{Detect OS and target client}
+    D --> P[Check prerequisites uvx / npx — ask before installing]
+    P --> S[User selects servers and provides any API keys]
+    S --> M[merge_server.py: backup, then merge only selected entries]
+    M --> V[Liveness check each server]
+    V --> Done[Restart client — tools available]

@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "twelvedata": {
+      "command": "uvx",
+      "args": ["mcp-server-twelve-data@latest", "-k", "${TWELVEDATA_API_KEY}", "-n", "5"]
+    },
+    "yahoo-finance": {
+      "command": "PATH_TO_MCP_YAHOO_FINANCE/.venv/bin/mcp-yahoo-finance"
+    },
+    "sec-edgar": {
+      "command": "uvx",
+      "args": ["sec-edgar-mcp"],
+      "env": { "SEC_EDGAR_USER_AGENT": "${SEC_EDGAR_USER_AGENT}" }
+    },
+    "coingecko": {
+      "command": "npx",
+      "args": ["-y", "@coingecko/coingecko-mcp@latest"]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
+    },
+    "youtube-transcript": {
+      "command": "npx",
+      "args": ["-y", "@sinco-lab/mcp-youtube-transcript"]
+    }
+  }
+}
