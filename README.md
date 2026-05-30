@@ -36,6 +36,13 @@ is never copied here), and the one maintained component is a small fork credited
 
 ## Example agent session
 
+<p align="center">
+  <img src="assets/demo.gif" alt="Animated demo: an agent installs the MCP servers — detect, prompt for keys, backup, merge, verify" width="100%">
+</p>
+
+<details>
+<summary>Same session as text</summary>
+
 ```text
 You:   Install the MCP servers from https://github.com/mgatorr/claude-mcp-stack
 Agent: Detected macOS + Claude Desktop. uvx ✓, npx ✓.
@@ -47,6 +54,8 @@ Agent: Detected macOS + Claude Desktop. uvx ✓, npx ✓.
        coingecko ✓ fetch ✓ youtube-transcript ✓
        Done — restart Claude (Cmd+Q) to load the tools.
 ```
+
+</details>
 
 ## How it works
 
