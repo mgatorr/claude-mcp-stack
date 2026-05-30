@@ -114,13 +114,18 @@ malformed entry fails validation with a clear message.
 
 ## Phase 6: Polish, Verification & Gated Publication
 
-**Purpose**: Final verification and the approval-gated public release of both repos.
+**Purpose**: Final verification and the approval-gated release of both repos.
 
-- [ ] T029 Run full local verification: `python3 scripts/validate_registry.py`, `python3 -m pytest -q`, `scripts/check_no_secrets.sh --history` — all green; capture output. NOTE: early commits in this repo were authored with the maintainer's personal email (before the noreply identity was set) and must be rewritten (see T032) so the `--history` scan passes.
-- [ ] T030 [P] Finalize `CHANGELOG.md` release entry and confirm README badges reference the real CI workflow path
-- [ ] T031 [GATE — requires explicit user approval] Publish the fork: create `github.com/mgatorr/mcp-yahoo-finance`, push `main` + tag `v0.1.3-mcpstack.1`, run secret scan `--history` on the fork first
-- [ ] T032 [GATE — requires explicit user approval] Publish `claude-mcp-stack`: FIRST rewrite all commit authors/committers to the noreply identity (`git filter-branch`/`rebase --root` or equivalent) and confirm `check_no_secrets.sh --history` is clean; then create the public repo, push `main`, set GitHub description and topics (`mcp`, `claude`, `model-context-protocol`, `claude-code`, `agents`)
-- [ ] T033 Post-publish verification: the pinned fork URL/tag resolves, CI is green on the public repo, README renders (diagram + badges)
+**Status (2026-05-30):** History squashed to a single clean noreply initial commit; full
+verification green locally AND in CI. Both repos pushed **PRIVATE** for review first:
+`github.com/mgatorr/mcp-yahoo-finance` and `github.com/mgatorr/claude-mcp-stack`. Flipping
+to **public** is the remaining step, pending the maintainer's review on GitHub.
+
+- [X] T029 Full verification green: `validate_registry.py`, `pytest` (24), `check_no_secrets.sh --history` — all clean after the squash, locally and in CI.
+- [X] T030 [P] `CHANGELOG.md` 0.1.0 entry written; README CI badge references `.github/workflows/ci.yml`.
+- [X] T031 Fork published **PRIVATE** at `github.com/mgatorr/mcp-yahoo-finance` with tag `v0.1.3-mcpstack.1` (only noreply/upstream authors reachable).
+- [X] T032 `claude-mcp-stack` published **PRIVATE**: history squashed to one clean noreply initial commit (no rewrite needed for a new repo), `check_no_secrets.sh --history` clean, pushed, description + topics set.
+- [ ] T033 Go public (pending maintainer review on GitHub): flip both repos to public, then confirm pinned fork URL/tag resolves, CI green, README renders (diagram + badges).
 
 ---
 
