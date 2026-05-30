@@ -6,19 +6,30 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout (full history for secret scan)
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+# Least privilege for a public repo.
+permissions:
+  contents: read
 
-      - name: Set up Python
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: validate & test (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install test dependencies
         run: python -m pip install --upgrade pip pytest
@@ -29,5 +40,27 @@ jobs:
       - name: Run tests
         run: python3 -m pytest -q
 
-      - name: Secret scan (working tree + git history)
+  security:
+    name: secret scan (tree + full history)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        env:
+          GITLEAKS_VERSION: "8.30.1"
+        run: |
+          curl -sSL -o /tmp/gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          tar -xzf /tmp/gitleaks.tar.gz -C /tmp gitleaks
+          sudo install /tmp/gitleaks /usr/local/bin/gitleaks
+          gitleaks version
+
+      - name: Repo secret scan (denylist + entropy, working tree + history)
         run: bash scripts/check_no_secrets.sh --history
+
+      - name: gitleaks (full history, uses .gitleaks.toml)
+        run: gitleaks detect --source . --redact

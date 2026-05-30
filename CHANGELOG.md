@@ -6,6 +6,15 @@ the `version` field in `registry.json`.
 
 ## [Unreleased]
 
+### Added
+
+- README visuals: hero banner, a hero-styled "how it works" graphic, and an animated
+  agent-install demo GIF.
+- CI hardening: a Python 3.10 / 3.12 test matrix and a dedicated secret-scan job (the repo
+  scanner over working tree + full history, plus `gitleaks`); least-privilege `permissions`
+  and `concurrency` cancellation.
+- `.gitleaks.toml` allowlist for the deliberate (fake) test fixtures.
+
 ## [0.1.0] - 2026-05-30
 
 ### Added
