@@ -54,6 +54,13 @@ The repo splits **data** (`registry.json`, the catalog) from **process** (`AGENT
 playbook). A small, tested helper (`scripts/merge_server.py`) performs a backup-first,
 non-destructive merge into your client config.
 
+<p align="center">
+  <img src="assets/how-it-works.png" alt="How it works: paste a link, the agent reads AGENTS.md + registry.json, detects OS & client, collects keys, merges backup-first, verifies, and restarts" width="100%">
+</p>
+
+<details>
+<summary>Same flow as a Mermaid diagram</summary>
+
 ```mermaid
 flowchart TD
     U[User pastes the repo URL to a Claude Code agent] --> A[Agent reads AGENTS.md]
@@ -65,6 +72,8 @@ flowchart TD
     M --> V[Liveness check each server]
     V --> Done[Restart client — tools available]
 ```
+
+</details>
 
 ## Supported clients
 
