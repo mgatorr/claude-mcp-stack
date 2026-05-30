@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
+
+  :root {
+    --bg:        #0a0f14;
+    --bg2:       #0f1822;
+    --ink:       #e8eef2;
+    --dim:       #8aa0ad;
+    --line:      rgba(120,160,180,.10);
+    --green:     #2ee27b;   /* finance / up-tick */
+    --amber:     #ffb24a;   /* crypto */
+    --blue:      #5aa9ff;   /* web */
+    --violet:    #b88bff;   /* media */
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  .stage {
+    width:1280px; height:640px; position:relative; overflow:hidden;
+    background:
+      radial-gradient(1100px 700px at 78% -10%, rgba(46,226,123,.10), transparent 60%),
+      radial-gradient(900px 600px at 8% 120%, rgba(90,169,255,.08), transparent 55%),
+      linear-gradient(160deg, var(--bg2), var(--bg));
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* dot grid */
+  .stage::before{
+    content:""; position:absolute; inset:0;
+    background-image:radial-gradient(rgba(140,170,190,.16) 1px, transparent 1.4px);
+    background-size:26px 26px;
+    -webkit-mask-image:linear-gradient(180deg, transparent, #000 18%, #000 70%, transparent);
+            mask-image:linear-gradient(180deg, transparent, #000 18%, #000 70%, transparent);
+    opacity:.5;
+  }
+  /* grain */
+  .stage::after{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .wrap{ position:absolute; inset:0; padding:64px 72px; display:flex; flex-direction:column; }
+
+  /* top bar: window chrome + prompt */
+  .top{ display:flex; align-items:center; gap:16px; color:var(--dim); font-size:15px; }
+  .dots{ display:flex; gap:8px; }
+  .dots i{ width:12px; height:12px; border-radius:50%; display:block; }
+  .dots i:nth-child(1){ background:#ff5f56; }
+  .dots i:nth-child(2){ background:#ffbd2e; }
+  .dots i:nth-child(3){ background:#27c93f; }
+  .prompt .g{ color:var(--green); }
+  .prompt .d{ color:var(--dim); }
+
+  /* sparkline top-right */
+  .spark{ margin-left:auto; opacity:.9; }
+
+  /* wordmark */
+  .mark{
+    margin-top:54px;
+    font-family:'Sora', sans-serif; font-weight:800;
+    font-size:96px; line-height:.98; letter-spacing:-2px;
+  }
+  .mark .accent{ color:var(--green); }
+  .caret{
+    display:inline-block; width:30px; height:80px; transform:translateY(12px);
+    margin-left:10px; background:var(--green);
+    box-shadow:0 0 26px rgba(46,226,123,.65); border-radius:3px;
+  }
+
+  .tag{
+    margin-top:26px; font-size:24px; color:var(--ink); max-width:880px; line-height:1.5;
+  }
+  .tag b{ color:var(--green); font-weight:600; }
+
+  .cmd{
+    margin-top:22px; font-size:17px; color:var(--dim);
+  }
+  .cmd .q{ color:var(--green); }
+  .cmd .url{ color:var(--blue); }
+
+  /* chips */
+  .chips{ margin-top:auto; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  .chip{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:10px 16px; border-radius:999px;
+    border:1px solid var(--line); background:rgba(255,255,255,.025);
+    font-size:16px; font-weight:500; color:var(--ink);
+    backdrop-filter:blur(2px);
+  }
+  .chip .dot{ width:9px; height:9px; border-radius:50%; }
+  .fin .dot{ background:var(--green); box-shadow:0 0 10px var(--green); }
+  .cry .dot{ background:var(--amber); box-shadow:0 0 10px var(--amber); }
+  .web .dot{ background:var(--blue);  box-shadow:0 0 10px var(--blue); }
+  .med .dot{ background:var(--violet);box-shadow:0 0 10px var(--violet); }
+
+  .foot{
+    margin-top:26px; display:flex; align-items:center; gap:18px;
+    font-size:13.5px; color:var(--dim); letter-spacing:.3px;
+  }
+  .foot .pill{ border:1px solid var(--line); border-radius:6px; padding:4px 9px; }
+  .foot .sep{ opacity:.4; }
+  .tickers{ margin-left:auto; color:var(--green); opacity:.75; letter-spacing:2px; }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="wrap">
+      <div class="top">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="prompt"><span class="d">~/claude</span> <span class="g">$</span> install mcp-stack</span>
+        <svg class="spark" width="220" height="44" viewBox="0 0 220 44" fill="none">
+          <polyline points="0,34 28,30 52,33 78,22 104,26 130,14 156,18 184,8 220,3"
+            stroke="#2ee27b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="220" cy="3" r="3.5" fill="#2ee27b"/>
+        </svg>
+      </div>
+
+      <h1 class="mark">claude<span class="accent">-</span>mcp<span class="accent">-</span>stack<span class="caret"></span></h1>
+
+      <p class="tag">An <b>agent-first</b> installer recipe for finance &amp; research MCP servers.</p>
+      <p class="cmd"><span class="q">paste to a Claude Code agent →</span> <span class="url">github.com/mgatorr/claude-mcp-stack</span></p>
+
+      <div>
+        <div class="chips">
+          <span class="chip fin"><span class="dot"></span>twelvedata</span>
+          <span class="chip fin"><span class="dot"></span>yahoo-finance</span>
+          <span class="chip fin"><span class="dot"></span>sec-edgar</span>
+          <span class="chip cry"><span class="dot"></span>coingecko</span>
+          <span class="chip web"><span class="dot"></span>fetch</span>
+          <span class="chip med"><span class="dot"></span>youtube-transcript</span>
+        </div>
+        <div class="foot">
+          <span class="pill">MIT</span>
+          <span class="sep">/</span>
+          <span>Claude Desktop · Claude Code</span>
+          <span class="sep">/</span>
+          <span>not affiliated with Anthropic</span>
+          <span class="tickers">.DE .PA .MC .L</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

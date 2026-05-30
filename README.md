@@ -1,10 +1,17 @@
-# claude-mcp-stack
+<p align="center">
+  <img src="assets/hero.png" alt="claude-mcp-stack — an agent-first installer recipe for finance & research MCP servers" width="100%">
+</p>
 
-**An agent-first installer recipe for finance & research MCP servers.**
+<h1 align="center">claude-mcp-stack</h1>
 
-[![CI](https://github.com/mgatorr/claude-mcp-stack/actions/workflows/ci.yml/badge.svg)](https://github.com/mgatorr/claude-mcp-stack/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![MCP servers: 6](https://img.shields.io/badge/MCP%20servers-6-success)
+<p align="center"><strong>An agent-first installer recipe for finance &amp; research MCP servers.</strong></p>
+
+<p align="center">
+  <a href="https://github.com/mgatorr/claude-mcp-stack/actions/workflows/ci.yml"><img src="https://github.com/mgatorr/claude-mcp-stack/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/MCP%20servers-6-success" alt="MCP servers: 6">
+  <img src="https://img.shields.io/badge/clients-Desktop%20%C2%B7%20Claude%20Code-5aa9ff" alt="Clients">
+</p>
 
 > **Not affiliated with, endorsed by, or sponsored by Anthropic.** "Claude" refers only to
 > the target client. This is an independent, community-maintained project.
