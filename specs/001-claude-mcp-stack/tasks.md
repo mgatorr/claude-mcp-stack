@@ -125,7 +125,7 @@ to **public** is the remaining step, pending the maintainer's review on GitHub.
 - [X] T030 [P] `CHANGELOG.md` 0.1.0 entry written; README CI badge references `.github/workflows/ci.yml`.
 - [X] T031 Fork published **PRIVATE** at `github.com/mgatorr/mcp-yahoo-finance` with tag `v0.1.3-mcpstack.1` (only noreply/upstream authors reachable).
 - [X] T032 `claude-mcp-stack` published **PRIVATE**: history squashed to one clean noreply initial commit (no rewrite needed for a new repo), `check_no_secrets.sh --history` clean, pushed, description + topics set.
-- [ ] T033 Go public (pending maintainer review on GitHub): flip both repos to public, then confirm pinned fork URL/tag resolves, CI green, README renders (diagram + badges).
+- [X] T033 Both repos flipped to **public** (2026-05-30): fork tag `v0.1.3-mcpstack.1` resolves publicly, all README assets return 200, CI green. Feature complete.
 
 ---
 
