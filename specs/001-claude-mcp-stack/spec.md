@@ -6,7 +6,7 @@
 
 **Status**: Draft
 
-**Input**: Approved design doc `docs/superpowers/specs/2026-05-30-claude-mcp-stack-design.md`
+**Input**: Approved design doc `docs/design.md`
 
 ## Clarifications
 

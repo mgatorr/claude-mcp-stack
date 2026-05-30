@@ -1,0 +1,15 @@
+# gitleaks configuration for claude-mcp-stack
+# Extends the default ruleset; allowlists deliberate, non-secret test fixtures.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Fake, non-secret fixtures used to test the secret scanner itself"
+paths = [
+  '''tests/test_check_no_secrets\.py''',
+]
+regexes = [
+  # Obviously-fake 32-hex fixture asserted by the scanner tests
+  '''0123456789abcdef0123456789abcdef''',  # pragma: allowlist secret
+]

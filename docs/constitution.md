@@ -21,8 +21,7 @@ Sync Impact Report
 A curated, agent-first, open-source recipe that lets a Claude Code agent install vetted
 finance/research MCP servers into Claude Desktop/Cowork and Claude Code. These principles
 are non-negotiable and govern every contribution. The approved design lives at
-`docs/superpowers/specs/2026-05-30-claude-mcp-stack-design.md`; this constitution outranks
-it where they conflict.
+`docs/design.md`; this constitution outranks it where they conflict.
 
 ## Core Principles
 

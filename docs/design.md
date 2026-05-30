@@ -91,7 +91,7 @@ claude-mcp-stack/
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── LICENSE                    # MIT
 ├── .gitignore                 # ignores real configs / secrets / venvs / *.bak (see §7)
-└── docs/superpowers/specs/    # this design doc
+└── docs/design.md             # this design doc
 ```
 
 ## 5. `registry.json` schema
